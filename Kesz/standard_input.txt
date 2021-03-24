@@ -25,4 +25,5 @@
 5 stop destruktor
 10 ez mar a vége
 11 ne tovább
+99
 0

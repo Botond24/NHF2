@@ -3,12 +3,13 @@ Memoriaszivargas-detektor
 Keszitette: Peregi Tamas, BME IIT, 2011
             petamas@iit.bme.hu
 Kanari:     Szeberenyi Imre, 2013.
-VS 2012:    SzeberÈnyi Imre, 2015.,
+VS 2012:    Szeber√©nyi Imre, 2015.,
 mem_dump:   2016.
 meset felszabaditaskor: 2018.
+typo:       2019.
 *********************************/
 
-/*definiealni kell, ha nem paracssorbol allitjuk be (-DMEMTRACE) */
+/*definialni kell, ha nem paracssorbol allitjuk be (-DMEMTRACE) */
 /*#define MEMTRACE */
 
 #ifdef _MSC_VER
@@ -167,7 +168,7 @@ START_NAMESPACE
 		fprintf(fperror,"%s\n",msg);
 		if (p) {
 			fprintf(fperror, "\tPointer:\t%p", PU(p));
-			if (size) fprintf(fperror," (%u byte)", (unsigned)size);
+			if (size) fprintf(fperror," (%d byte)", (int)size);
 			fprintf(fperror,"\n");
 		}
 		if (a) print_call("\tFoglalas:\t", *a);
@@ -199,7 +200,7 @@ START_NAMESPACE
 	static void print_registry_item(registry_item * p) {
 		if (p) {
 			print_registry_item(p->next);
-			fprintf(fperror, "\t%p%5u byte ",p->p, (unsigned)p->size);
+			fprintf(fperror, "\t%p%5d byte ",p->p, (int)p->size);
 			print_call(NULL, p->call);
 			if(p->call.par_txt) free(p->call.par_txt);
 			if(p->call.file) free(p->call.file);
@@ -207,10 +208,10 @@ START_NAMESPACE
 		}
 	}
 
-	/* ha nincs hiba, akkor 0-val tÈr vissza */
+	/* ha nincs hiba, akkor 0-val t√©r vissza */
 	int mem_check(void) {
 		initialize();
-		if(dying) return  2;    /* cÌmzÈsi hiba */
+		if(dying) return  2;    /* c√≠mz√©si hiba */
 
 		if(registry.next) {
 			/*szivarog*/
@@ -220,7 +221,7 @@ START_NAMESPACE
 			fprintf(fperror, "Szivargas:\n");
 			print_registry_item(registry.next);
 			registry.next = NULL;
-			return 1;           /* memÛria fogy·s */
+			return 1;           /* mem√≥ria fogy√°s */
 		}
         return 0;
 	}
@@ -250,7 +251,7 @@ START_NAMESPACE
 		initialize();
 		allocated_blks++;
 		#ifdef MEMTRACE_TO_FILE
-			fprintf(trace_file, "%p\t%d\t%s%s", PU(p), size, pretty[call.f], call.par_txt ? call.par_txt : "?");
+			fprintf(trace_file, "%p\t%d\t%s%s", PU(p), (int)size, pretty[call.f], call.par_txt ? call.par_txt : "?");
 			if (call.f <= 3) fprintf(trace_file, ")");
 			fprintf(trace_file, "\t%d\t%s\n", call.line, call.file ? call.file : "?");
 			fflush(trace_file);
@@ -320,7 +321,7 @@ START_NAMESPACE
 END_NAMESPACE
 
 /*******************************************************************/
-/* C-stÌlus˙ memÛriakezelÈs */
+/* C-st√≠lus√∫ mem√≥riakezel√©s */
 /*******************************************************************/
 
 #ifdef MEMTRACE_C
@@ -414,7 +415,7 @@ END_NAMESPACE
 #endif/*MEMTRACE_C*/
 
 /*******************************************************************/
-/* C++-stÌlus˙ memÛriakezelÈs */
+/* C++-st√≠lus√∫ mem√≥riakezel√©s */
 /*******************************************************************/
 
 #ifdef MEMTRACE_CPP
@@ -431,7 +432,7 @@ START_NAMESPACE
 
 	void set_delete_call(int line, const char * file) {
 		initialize();
-		delete_call=pack(0,"",line,file); /*func ÈrtÈke lÈnyegtelen, majd fel¸lÌrjuk*/
+		delete_call=pack(0,"",line,file); /*func √©rt√©ke l√©nyegtelen, majd fel√ºl√≠rjuk*/
 		delete_called = TRUE;
 	}
 
@@ -486,9 +487,17 @@ void operator delete(void * p) THROW_NOTHING {
 void operator delete[](void * p) THROW_NOTHING {
 	memtrace::traced_delete(p,FDELETEARR);
 }
+#if __cplusplus >= 201402L
+void operator delete(void * p, size_t) THROW_NOTHING {
+	memtrace::traced_delete(p,FDELETE);
+}
 
+void operator delete[](void * p, size_t) THROW_NOTHING {
+	memtrace::traced_delete(p,FDELETEARR);
+}
+#endif
 
-/* Visual C++ 2012 miatt kell, mert h·klis, hogy nincs megfelelı delete, b·r senki sem haszn·lja */
+/* Visual C++ 2012 miatt kell, mert h√°klis, hogy nincs megfelel≈ë delete, b√°r senki sem haszn√°lja */
 void operator delete(void * p, int, const char *) THROW_NOTHING {
 	memtrace::traced_delete(p,FDELETE);
 }
@@ -514,7 +523,7 @@ START_NAMESPACE
 			#ifdef MEMTRACE_TO_MEMORY
 				registry.next = NULL;
 				#if !defined(USE_ATEXIT_OBJECT) && defined(MEMTRACE_AUTO)
-					atexit((void(*)())mem_check);
+					atexit((void(*)(void))mem_check);
 				#endif
 			#endif
 			#ifdef MEMTRACE_TO_FILE

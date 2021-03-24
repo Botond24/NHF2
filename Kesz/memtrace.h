@@ -5,7 +5,7 @@ Keszitette: Peregi Tamas, BME IIT, 2011
 Kanari:     Szeberenyi Imre, 2013.,
 VS 2012:    Szeberényi Imre, 2015.,
 mem_dump:   2016.
-include-ok:  2017, 2018.
+inclue-ok:  2017., 2018., 2019., 2021.
 *********************************/
 
 #ifndef MEMTRACE_H
@@ -71,15 +71,28 @@ include-ok:  2017, 2018.
 	#define TRACEC(func) func
 #endif
 
-/* A Visual Studio figyelmen kivul hagyja a "throw" deklaraciokat, a gcc -pedantic pedig igenyli.*/
-#ifdef _MSC_VER
-	/* Ha studio */
+// THROW deklaráció változatai
+#if defined(_MSC_VER)
+  // VS rosszul kezeli az __cplusplus makrot
+  #if _MSC_VER < 1900
+    // * nem biztos, hogy jó így *
 	#define THROW_BADALLOC
 	#define THROW_NOTHING
+  #else
+    // C++11 vagy újabb
+	#define THROW_BADALLOC noexcept(false)
+	#define THROW_NOTHING noexcept
+  #endif
 #else
-	/* Normalis forditok */
+  #if __cplusplus < 201103L
+	// C++2003 vagy régebbi
 	#define THROW_BADALLOC throw (std::bad_alloc)
 	#define THROW_NOTHING throw ()
+  #else
+    // C++11 vagy újabb
+	#define THROW_BADALLOC noexcept(false)
+	#define THROW_NOTHING noexcept
+  #endif
 #endif
 
 START_NAMESPACE
@@ -131,12 +144,26 @@ END_NAMESPACE
 #include <stdlib.h>
 #ifdef __cplusplus
 	#include <iostream>
-/* ide gyűjtjük a nemtrace-szel összeakadó headereket, hogy elõbb legyenek */
+/* ide gyűjtjük a nemtrace-vel összeakadó headereket, hogy előbb legyenek */
 
 	#include <fstream>  // VS 2013 headerjében van deleted definició
 	#include <sstream>
 	#include <vector>
+	#include <list>
+	#include <map>
 	#include <algorithm>
+	#include <functional>
+	#include <memory>
+	#include <iomanip>
+	#include <locale>
+	#include <typeinfo>
+	#include <ostream>
+	#include <stdexcept>
+	#include <ctime>
+    #if __cplusplus >= 201103L
+        #include <iterator>
+        #include <regex>
+    #endif
 #endif
 #ifdef MEMTRACE_CPP
 	namespace std {
@@ -162,7 +189,7 @@ START_NAMESPACE
 	#define realloc(old,size) TRACEC(traced_realloc)(old,size,#size,__LINE__,__FILE__)
 	void * traced_realloc(void * old, size_t size, const char *size_txt, int line, const char * file);
 
-	void mem_dump(void const *mem, size_t size, FILE* fp);
+	void mem_dump(void const *mem, size_t size, FILE* fp = stdout);
 
 
 END_NAMESPACE
@@ -184,7 +211,13 @@ void * operator new[](size_t size) THROW_BADALLOC;
 void operator delete(void * p)  THROW_NOTHING;
 void operator delete[](void * p) THROW_NOTHING;
 
-/* Visual C++ 2012 miatt kell, mert háklis, hogy nincs megfelelõ delete, bár senki sem használja */
+#if __cplusplus >= 201402L
+// sized delete miatt: http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3536.html
+void operator delete(void * p, size_t)  THROW_NOTHING;
+void operator delete[](void * p, size_t) THROW_NOTHING;
+#endif
+
+/* Visual C++ 2012 miatt kell, mert háklis, hogy nincs megfelelő delete, bár senki sem használja */
 void operator delete(void *p, int, const char *) THROW_NOTHING;
 void operator delete[](void *p, int, const char *) THROW_NOTHING;
 
@@ -193,11 +226,14 @@ void operator delete[](void *p, int, const char *) THROW_NOTHING;
 #define delete memtrace::set_delete_call(__LINE__, __FILE__),delete
 
 #ifdef CPORTA
-//#define system(...)  // system(__VA_ARGS__)
+#define system(...)  // system(__VA_ARGS__)
 #endif
 
 #endif /*MEMTRACE_CPP*/
 
 #endif /*FROM_MEMTRACE_CPP*/
-#endif /*MEMCHECK*/
+#else
+#pragma message ( "MEMTRACE NOT DEFINED" )
+#endif /*MEMTRACE*/
+
 #endif /*MEMTRACE_H*/
