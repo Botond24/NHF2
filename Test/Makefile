@@ -1,7 +1,7 @@
 #
 # Ehhez hasonlo makefile fut a JPORTA-n
 #
-# Masolja be a jportara feltoldendo fajlait ebbe a katalogisba (2 db zip, és egy text)
+# Masolja be a jportara feltoldendo fajlait ebbe a katalogusba (2 db zip, és egy text)
 #
 # Zipek kicsomagolasa: 
 #    make unpack
