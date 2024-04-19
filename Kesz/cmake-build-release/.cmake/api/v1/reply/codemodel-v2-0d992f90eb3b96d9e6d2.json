@@ -1,0 +1,105 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Release-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "NHF",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "NHF::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NHF-Release-a45b2c5fe2387b5804e4.json",
+					"name" : "NHF",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "algorithm::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-algorithm-Release-2d27e752aa890a283bfa.json",
+					"name" : "algorithm",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "edge::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-edge-Release-3d2ef92052c2847219ea.json",
+					"name" : "edge",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "graph::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-graph-Release-d6984d73ad74b6966ed7.json",
+					"name" : "graph",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "node::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-node-Release-3c33b013488fbe31be48.json",
+					"name" : "node",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "vector::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-vector-Release-640d86beda6855efc8be.json",
+					"name" : "vector",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/Documents/cpp/NHF/Kesz/cmake-build-release",
+		"source" : "D:/Documents/cpp/NHF/Kesz"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

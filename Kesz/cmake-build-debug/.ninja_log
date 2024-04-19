@@ -1,0 +1,21 @@
+# ninja log v5
+19	371	7351660815962418	build.ninja	d415b0ae55458cc3
+18	428	7350141560439465	CMakeFiles/NHF.dir/NHF_main.cpp.obj	44f17d7b66cd5f94
+28	203	7350112919698310	CMakeFiles/NHF.dir/algorithm/algorithm.cpp.obj	7f39851c66744db7
+23	234	7349848631543861	CMakeFiles/NHF.dir/algorithm.cpp.obj	17fa291badfe79a6
+924	1071	7350147543988534	NHF.exe	85f7a4666e31e9da
+19	366	7350130058152642	CMakeFiles/NHF.dir/helper/vectorCustom.cpp.obj	4fb02d70000c8838
+19	536	7350140279930499	CMakeFiles/NHF.dir/node/node.cpp.obj	119132dbb023f39f
+22	528	7350140279871988	CMakeFiles/NHF.dir/edge/edge.cpp.obj	58a1d294dd5ec48
+17	565	7350140280232882	CMakeFiles/NHF.dir/graph/graph.cpp.obj	516f12a49ea92de2
+14	536	7350140279930499	CMakeFiles/NHF.dir/helper/vector.cpp.obj	85893b24c8fe01e
+49	155	7350147534881925	CMakeFiles/algorithm.dir/algorithm/algorithm.cpp.obj	55c6fb19fae5bb9b
+156	440	7350147537701502	libalgorithm.a	43e9c051048c1a4d
+44	689	7350147540227325	CMakeFiles/vector.dir/helper/vector.cpp.obj	56ff0fb5852d31c1
+39	696	7350147540298244	CMakeFiles/edge.dir/edge/edge.cpp.obj	1c3238f9f758c450
+34	719	7350147540529468	CMakeFiles/node.dir/node/node.cpp.obj	96cc351dbe17250b
+828	924	7350147542577797	libgraph.a	82251efddb7f55df
+689	790	7350147541235334	libvector.a	e128956294825a0
+696	801	7350147541340220	libedge.a	e738aa2d2fc1039e
+720	820	7350147541538388	libnode.a	b6e01c6182ba7f33
+28	828	7350147541613802	CMakeFiles/graph.dir/graph/graph.cpp.obj	8aa2533c825194ba

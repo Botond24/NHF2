@@ -1,0 +1,105 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "NHF",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "NHF::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NHF-Debug-6bd53301152bab9a403e.json",
+					"name" : "NHF",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "algorithm::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-algorithm-Debug-20923477262b15122236.json",
+					"name" : "algorithm",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "edge::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-edge-Debug-44ee12fa124c36309988.json",
+					"name" : "edge",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "graph::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-graph-Debug-035f4eb8026e12120f5d.json",
+					"name" : "graph",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "node::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-node-Debug-93cf137e262988504b88.json",
+					"name" : "node",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "vector::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-vector-Debug-8d70d1ba455c0159513d.json",
+					"name" : "vector",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/Documents/cpp/NHF/Kesz/cmake-build-debug",
+		"source" : "D:/Documents/cpp/NHF/Kesz"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
